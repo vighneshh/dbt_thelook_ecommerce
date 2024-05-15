@@ -19,7 +19,8 @@ with stg_inventory_items as (
     product_department,
     product_sku,
     product_distribution_center_id
-    FROM `my-bi-project-406904.thelook_ecommerce.inventory_items`
+    -- FROM `my-bi-project-406904.thelook_ecommerce.inventory_items`
+    from {{ source('thelook_ecommerce', 'inventory_items') }}
 ),
 
 
@@ -29,7 +30,8 @@ stg_distribution_centers as (
     SELECT 
     name as distribution_center_name,
     id as distribution_center_id 
-    FROM `my-bi-project-406904.thelook_ecommerce.distribution_centers`
+    -- FROM `my-bi-project-406904.thelook_ecommerce.distribution_centers`
+    from {{ source('thelook_ecommerce', 'distribution_centers') }}
 
 ),
 
