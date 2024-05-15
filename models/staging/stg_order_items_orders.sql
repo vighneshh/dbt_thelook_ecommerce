@@ -18,7 +18,8 @@ with stg_order_items as (
     delivered_at,
     returned_at,
     sale_price
-    FROM `my-bi-project-406904.thelook_ecommerce.order_items`
+    -- FROM `my-bi-project-406904.thelook_ecommerce.order_items`
+    from {{ source('thelook_ecommerce', 'order_items') }}
 ),
 
 
@@ -28,7 +29,8 @@ stg_orders as (
 SELECT
  order_id, 
  num_of_item 
- FROM `my-bi-project-406904.thelook_ecommerce.orders`
+--  FROM `my-bi-project-406904.thelook_ecommerce.orders`
+ from {{ source('thelook_ecommerce', 'orders') }}
 ),
 
 
