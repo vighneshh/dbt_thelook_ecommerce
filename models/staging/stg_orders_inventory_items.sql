@@ -70,7 +70,7 @@ stg_orders_inv_items as (
     stg_inv_items.product_distribution_center_id,
     stg_inv_items.distribution_center_name
     from stg_orders2
-    full join stg_inv_items  
+    left join stg_inv_items  
     on stg_orders2.inventory_item_id = stg_inv_items.inventory_item_id
 )
 

@@ -9,3 +9,4 @@ sources:
       - name: distribution_centers
       - name: order_items
       - name: orders
+      - name: users
