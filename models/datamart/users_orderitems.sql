@@ -12,7 +12,13 @@ with stg_users as (
     last_name,
     email,
     age,
-    gender,
+    CASE 
+    WHEN gender = 'M' THEN 'Male'
+    WHEN gender = 'F' THEN 'Female'
+    WHEN gender IS NULL THEN 'NA'
+    ELSE gender
+  END AS gender,
+    -- gender,
     state,
     street_address,
     postal_code,
@@ -21,7 +27,7 @@ with stg_users as (
     latitude as user_latitude,
     longitude as user_longitude,
     traffic_source,
-    created_at as users_created_at
+    date(created_at) as users_created_at
     -- FROM `my-bi-project-406904.thelook_ecommerce.inventory_items`
     from {{ source('thelook_ecommerce', 'users') }}
 ),
@@ -34,14 +40,14 @@ stg_orders_inv_items as (
     order_product_id,
     inventory_item_id,
     status,
-    order_item_created_at,
-    shipped_at,
-    delivered_at,
-    returned_at,
+    date(order_item_created_at) as order_item_created_at,
+    date(shipped_at) as shipped_at,
+    date(delivered_at) as delivered_at,
+    date(returned_at) as returned_at,
     sale_price,
 
     product_id,
-    inventory_item_created_at,
+    date(inventory_item_created_at) as inventory_item_created_at,
     sold_at,
     cost,	
     product_category,
